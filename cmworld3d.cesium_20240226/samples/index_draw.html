@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>CmWorld3D Viewer</title>
+    <script src="./draw/appMain.js"></script>
+	<style>
+        html, body {width: 100%; height: 100%; margin: 0; overflow: hidden;}
+		#mapContainer { position: absolute; width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+	</style>
+	<script>
+		$(document).ready(function() {
+            Init();
+		});
+	</script>
+</head>
+<body>
+    <div id="button_panel">
+        <button type="button" id="BTN_DRAW_POINT" onclick="Draw_Point();">Point</button>
+        <button type="button" id="BTN_DRAW_POLYLINE" onclick="Draw_Polyline();">Polyline</button>
+        <button type="button" id="BTN_DRAW_POLYGON" onclick="Draw_Polygon();">Polygon</button>
+        <button type="button" id="BTN_DRAW_RECT" onclick="Draw_Rect();">Rect</button>
+        <button type="button" id="BTN_CANCEL" onclick="Cancel();">Cancel</button>
+        <button type="button" id="BTN_REFRESH" onclick="Refresh();">Refresh</button>
+    </div>
+	<div id="mapContainer"></div>
+</body>
+</html>

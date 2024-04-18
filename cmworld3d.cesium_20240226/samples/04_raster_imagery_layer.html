@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>CmWorld3D Viewer</title>
+    <script src="../cmworld/CmWorld.js"></script>
+	<style>
+        html, body {width: 100%; height: 100%; margin: 0; overflow: hidden;}
+		#mapContainer { position: absolute; width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+	</style>
+	<script>
+		var viewer;
+		$(document).ready(function() {
+            
+            viewer = CmWorld.Viewer("mapContainer", { baseLayer: "blue" });
+
+            viewer.camera.setView({ destination: Cesium.Cartesian3.fromDegrees(127.700, 35.832, 20000000) });
+            viewer.scene.render();
+		});
+
+        function FullExtent() {
+            CmWorld.fullExtent();
+        }
+
+        function ZoomIn() {
+            CmWorld.zoomIn();
+        }
+
+        function ZoomOut() {
+            CmWorld.zoomOut();
+        }
+
+        function AddImagery_VWorld() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.VWorldImageryProvider({ layer: "base" }) );
+        }
+
+        function AddImagery_VWorld_Satelliete() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.VWorldImageryProvider({ layer: "satellite" }) );
+        }
+
+        function AddImagery_VWorld_White() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.VWorldImageryProvider({ layer: "white" }) );
+        }
+
+        function AddImagery_VWorld_Midnight() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.VWorldImageryProvider({ layer: "midnight" }) );
+        }
+
+        function AddImagery_VWorld_Hybrid() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.VWorldImageryProvider({ layer: "hybrid" }) );
+        }
+
+        function AddImagery_Google_Maps() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.GoogleImageryProvider({ layer: "standard" }) );
+        }
+
+        function AddImagery_Google_Satellite() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.GoogleImageryProvider({ layer: "satellite" }) );
+        }
+
+        function AddImagery_Google_Roads() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.GoogleImageryProvider({ layer: "roads" }) );
+        }
+
+        function AddImagery_Google_Hybrid() {
+            viewer.imageryLayers.addImageryProvider( CmWorld.GoogleImageryProvider({ layer: "hybrid" }) );
+        }
+        
+        function AddImagery_MyLayer() {
+            let imageryProvider = new Cesium.TileMapServiceImageryProvider({ url: "../test_data/raster/ud_imagery", maximumLevel: 16 });
+            viewer.imageryLayers.addImageryProvider( imageryProvider );
+        }
+	</script>
+</head>
+<body>
+    <div id="button_panel">
+        <button type="button" id="BTN_FULL_EXTENT" onclick="FullExtent();">전체</button>
+        <button type="button" id="BTN_ZOOM_IN" onclick="ZoomIn();">확대</button>
+        <button type="button" id="BTN_ZOOM_OUT" onclick="ZoomOut();">축소</button> 
+        <button type="button" id="BTN_ADD_IMAGERY_VWORLD" onclick="AddImagery_VWorld();">VWorld Maps</button>
+        <button type="button" id="BTN_ADD_IMAGERY_VWORLD_SATELLITE" onclick="AddImagery_VWorld_Satelliete();">VWorld (Satellite)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_VWORLD_WHITE" onclick="AddImagery_VWorld_White();">VWorld (White)</button>        
+        <button type="button" id="BTN_ADD_IMAGERY_VWORLD_MIDNIGHT" onclick="AddImagery_VWorld_Midnight();">VWorld (Midnight)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_VWORLD_HYBRID" onclick="AddImagery_VWorld_Hybrid();">VWorld (Hybrid)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_GOOGLE" onclick="AddImagery_Google_Maps();">Google Maps</button>
+        <button type="button" id="BTN_ADD_IMAGERY_GOOGLE_SATELLITE" onclick="AddImagery_Google_Satellite();">Google (Satellite)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_GOOGLE_ROADS" onclick="AddImagery_Google_Roads();">Google (Roads)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_GOOGLE_HYBRID" onclick="AddImagery_Google_Hybrid();">Google (Hybrid)</button>
+        <button type="button" id="BTN_ADD_IMAGERY_MY_SERVER" onclick="AddImagery_MyLayer();">레이어 추가</button>        
+    </div>
+	<div id="mapContainer"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>CmWorld3D Viewer</title>
+    <script src="../cmworld/CmWorld.js"></script>
+    <script src="./map_event/DrawMarker.js"></script>
+	<style>
+        html, body {width: 100%; height: 100%; margin: 0; overflow: hidden;}
+		#mapContainer { position: absolute; width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+	</style>
+	<script>
+
+        var viewer = null;
+        var drawMarker = null;
+
+		$(document).ready(function() {
+
+            viewer = CmWorld.Viewer("mapContainer");
+
+            viewer.camera.setView({ destination: Cesium.Cartesian3.fromDegrees(127.700, 35.832, 20000000) });
+            viewer.scene.render();
+
+            // Init Mouse Event
+            CmWorld.initEvent();
+		});
+
+        function AddEvent()
+        {
+            // Test Module
+            drawMarker = new DrawMarker({ viewer: viewer });
+        }
+
+        function RemoveEvent()
+        {
+            if (drawMarker != null)
+                drawMarker.dispose();
+        }
+
+	</script>
+</head>
+<body>
+    <div id="button_panel">
+        <button type="button" id="ADD_MOUSE_EVENT" onclick="AddEvent();">Add Mouse Event</button>
+        <button type="button" id="REMOVE_MOUSE_EVENT" onclick="RemoveEvent();">Remove Mouse Event</button>        
+    </div>
+	<div id="mapContainer"></div>
+</body>
+</html>

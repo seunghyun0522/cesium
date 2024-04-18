@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>CmWorld3D Viewer</title>
+    <script src="../cmworld/CmWorld.js"></script>
+	<style>
+        html, body {width: 100%; height: 100%; margin: 0; overflow: hidden;}
+		#mapContainer { position: absolute; width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+	</style>
+	<script>
+		var viewer;
+		$(document).ready(function() {
+            
+            viewer = CmWorld.Viewer("mapContainer", { baseLayer: "blue" });
+
+            viewer.camera.setView({ destination: Cesium.Cartesian3.fromDegrees(127.700, 35.832, 20000000) });
+            viewer.scene.render();
+		});
+
+        function FullExtent() {
+            CmWorld.fullExtent();
+        }
+
+        function ZoomIn() {
+            CmWorld.zoomIn();
+        }
+
+        function ZoomOut() {
+            CmWorld.zoomOut();
+        }
+
+        function SetDebug() {
+            if ($('.cesium-cesiumInspector').length == 0) {
+                viewer.extend(Cesium.viewerCesiumInspectorMixin);
+                $('.cesium-cesiumInspector').removeClass('cesium-cesiumInspector-visible');
+                $('.cesium-cesiumInspector').addClass('cesium-cesiumInspector-hidden');
+            }
+        }
+
+        function SetTerrain_VWorld() {
+            viewer.terrainProvider = CmWorld.VWorldTerrainProvider();
+        }
+	</script>
+</head>
+<body>
+    <div id="button_panel">
+        <button type="button" id="BTN_FULL_EXTENT" onclick="FullExtent();">전체</button>
+        <button type="button" id="BTN_ZOOM_IN" onclick="ZoomIn();">확대</button>
+        <button type="button" id="BTN_ZOOM_OUT" onclick="ZoomOut();">축소</button> 
+        <button type="button" id="BTN_SET_TERRAIN_VWORLD" onclick="SetTerrain_VWorld();">VWorld Terrain</button>
+        <button type="button" id="BTN_DEBUG" onclick="SetDebug();">Cesium Inspector</button> 
+    </div>
+	<div id="mapContainer"></div>
+</body>
+</html>
